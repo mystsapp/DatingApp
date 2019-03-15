@@ -38,6 +38,7 @@ namespace DatingApp.API {
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             }); // ignore some error
             services.AddCors (); //for sharing webapi
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(); // automapper
             services.AddTransient<Seed>(); //add users into database
             services.AddScoped<IAuthRepository, AuthRepository> (); //register service
@@ -76,7 +77,7 @@ namespace DatingApp.API {
 
             // app.UseHttpsRedirection();
             //seeder.SeedUsers(); //add users into database
-            app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());// allow arigin
+            app.UseCors (x => x.AllowAnyOrigin ().AllowAnyHeader ().AllowAnyMethod ());// allow arigin
             app.UseAuthentication();
             app.UseMvc ();
         }
