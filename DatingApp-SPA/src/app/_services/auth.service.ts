@@ -14,6 +14,7 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   currentUser: User;
+  // photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
 
@@ -39,8 +40,8 @@ export class AuthService {
     );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   loggedIn() {
@@ -48,3 +49,4 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 }
+
